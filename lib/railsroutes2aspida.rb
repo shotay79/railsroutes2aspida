@@ -63,11 +63,21 @@ module Railsroutes2aspida
         path = route.path.spec.to_s
         next if path.match(/rails|cable/)
 
+        method = route.verb.downcase
+        next if method == 'patch'
+
         {
           method: route.verb.downcase,
-          path: route.path.spec.to_s.gsub('(.:format)', '')
+          path: route.path.spec.to_s.gsub('(.:format)', ''),
         }
-      end.compact.uniq
+      end.compact.uniq.sort_by do |route|
+        case route[:method]
+        when 'delete' then 1
+        when 'put' then 2
+        when 'post' then 3
+        when 'get' then 4
+        end
+      end
     end
   end
 end
