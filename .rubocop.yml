@@ -1,0 +1,15 @@
+require:
+  - rubocop-airbnb
+
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Enabled: true
+
+Layout/EmptyLinesAroundAccessModifier:
+  Enabled: true
+
+Layout/LineLength:
+  Max: 120

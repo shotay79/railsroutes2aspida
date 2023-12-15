@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'bundler/setup'
+require 'rake'
+
+bundler_root = Bundler.root.to_s
+
+require File.join(bundler_root, 'config/environment')
+
+load 'Rakefile'
+
+Dir[File.join(File.dirname(File.dirname(__FILE__)), 'lib/tasks', '**/*.rake')].each do |rake|
+  load rake
+end
+
+Rake::Task['railsroutes2aspida:execute'].execute
